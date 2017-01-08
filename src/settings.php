@@ -15,5 +15,33 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+
+        // DB settings
+        'db' => [
+          'type'    => 'sqlite',
+          'path'    => __DIR__ . '/../../wikka',
+          'host'    => "localhost",
+          'user'    => "wikka",
+          'pass'    => "wikka-password",
+          'dbname'  => "wikka",
+        ],
     ],
 ];
+
+/*
+'type'    => 'mysql',
+'path'    => __DIR__ . '/../../wikka',
+'host'    => "localhost",
+'user'    => "wikka",
+'pass'    => "wikka-password",
+'dbname'  => "wikka",
+*/
+
+/*
+'type'    => 'sqlite',
+'path'    => __DIR__ . '/../../wikka',
+'host'    => "localhost",
+'user'    => "user",
+'pass'    => "password",
+'dbname'  => "exampleapp",
+*/
