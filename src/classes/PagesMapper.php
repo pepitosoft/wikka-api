@@ -16,8 +16,21 @@ class PagesMapper extends Mapper
   }
 
   public function getPages() {
+        $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note
+            FROM ".$this->settings['db']['prefix']."pages p
+            WHERE p.latest = 'Y' LIMIT 5";
+      $stmt = $this->db->query($sql);
+      $results = [];
+      while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+          $row->body = base64_encode($row->body);
+          $results[] = $row;
+      }
+      return $results;
+  }
+
+  public function getPagesAll($rows_number) {
       $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note
-          from wikka_pages p";
+          FROM ".$this->settings['db']['prefix']."pages p";
       $stmt = $this->db->query($sql);
       //$pages = $result->fetch(PDO::FETCH_OBJ);
       $results = [];
@@ -25,6 +38,23 @@ class PagesMapper extends Mapper
           $row->body = base64_encode($row->body);
           $results[] = $row;
       }
+      return $results;
+  }
+
+  /**
+   * Get one pages by its ID
+   *
+   * @param int $ticket_id The ID of the ticket
+   * @return TicketEntity  The ticket
+   */
+  public function getPageById($page_id) {
+      $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note
+          FROM ".$this->settings['db']['prefix']."pages p
+          where p.id = :page_id";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute(["page_id" => $page_id]);
+      $results = $stmt->fetch(PDO::FETCH_OBJ);
+      $results->body = base64_encode($results->body);
       return $results;
   }
 
@@ -39,23 +69,7 @@ class PagesMapper extends Mapper
         }
         return $results;
     }
-    /**
-     * Get one ticket by its ID
-     *
-     * @param int $ticket_id The ID of the ticket
-     * @return TicketEntity  The ticket
-     */
-    public function getTicketById($ticket_id) {
-        $sql = "SELECT t.id, t.title, t.description, c.component
-            from tickets t
-            join components c on (c.id = t.component_id)
-            where t.id = :ticket_id";
-        $stmt = $this->db->prepare($sql);
-        $result = $stmt->execute(["ticket_id" => $ticket_id]);
-        if($result) {
-            return new TicketEntity($stmt->fetch());
-        }
-    }
+
     public function save(TicketEntity $ticket) {
         $sql = "insert into tickets
             (title, description, component_id) values
