@@ -1,7 +1,9 @@
 <?php
 abstract class Mapper {
     protected $db;
-    public function __construct($db) {
+    protected $settings;
+    public function __construct($db, $settings) {
         $this->db = $db;
+        $this->settings = $settings;
     }
 }

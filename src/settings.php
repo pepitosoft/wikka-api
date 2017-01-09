@@ -20,6 +20,7 @@ return [
         'db' => [
           'type'    => 'sqlite',
           'path'    => __DIR__ . '/../../wikka',
+          'prefix'  => 'wikka_',
           'host'    => "localhost",
           'user'    => "wikka",
           'pass'    => "wikka-password",

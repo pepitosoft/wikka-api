@@ -1,14 +1,15 @@
 <?php
-class PageMapper extends Mapper
+class PagesMapper extends Mapper
 {
-  public function getPages() {
-      $sql = "PRAGMA table_info([wikka_pages])";
+  public function getPagesDef() {
+      if( $this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == "sqlite" ){
+        $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."pages])";
+      } else {
+        $sql = "DESCRIBE ".$this->settings['db']['prefix']."pages";
+      }
       $stmt = $this->db->query($sql);
-      //$pages = $result->fetch(PDO::FETCH_OBJ);
       $results = [];
       while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-          $row->body = base64_encode($row->body);
-          //['body'] = base64_encode($row['body']);
           $results[] = $row;
       }
       return $results;
