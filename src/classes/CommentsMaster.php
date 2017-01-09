@@ -1,11 +1,11 @@
 <?php
 class CommentsMapper extends Mapper
 {
-  public function getUserDef() {
+  public function getDef() {
       if( $this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == "sqlite" ){
-        $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."pages])";
+        $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."comments])";
       } else {
-        $sql = "DESCRIBE ".$this->settings['db']['prefix']."pages";
+        $sql = "DESCRIBE ".$this->settings['db']['prefix']."comments";
       }
       $stmt = $this->db->query($sql);
       $results = [];

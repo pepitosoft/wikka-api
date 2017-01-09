@@ -18,7 +18,7 @@ return [
 
         // DB settings
         'db' => [
-          'type'    => 'sqlite',
+          'type'    => 'mysql',
           'path'    => __DIR__ . '/../../wikka',
           'prefix'  => 'wikka_',
           'host'    => "localhost",

@@ -1,11 +1,11 @@
 <?php
 class AclsMapper extends Mapper
 {
-  public function getUserDef() {
+  public function getDef() {
       if( $this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == "sqlite" ){
-        $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."pages])";
+        $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."acls])";
       } else {
-        $sql = "DESCRIBE ".$this->settings['db']['prefix']."pages";
+        $sql = "DESCRIBE ".$this->settings['db']['prefix']."acls";
       }
       $stmt = $this->db->query($sql);
       $results = [];

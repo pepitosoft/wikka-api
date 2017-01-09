@@ -1,7 +1,7 @@
 <?php
 class PagesMapper extends Mapper
 {
-  public function getPagesDef() {
+  public function getDef() {
       if( $this->db->getAttribute(PDO::ATTR_DRIVER_NAME) == "sqlite" ){
         $sql = "PRAGMA table_info([".$this->settings['db']['prefix']."pages])";
       } else {
@@ -15,16 +15,14 @@ class PagesMapper extends Mapper
       return $results;
   }
 
-  public function getPagesAll() {
-      $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note, u.email
-          from wikka_pages p
-          join wikka_users u on (u.name = p.owner)";
+  public function getPages() {
+      $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note
+          from wikka_pages p";
       $stmt = $this->db->query($sql);
       //$pages = $result->fetch(PDO::FETCH_OBJ);
       $results = [];
       while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
           $row->body = base64_encode($row->body);
-          //['body'] = base64_encode($row['body']);
           $results[] = $row;
       }
       return $results;
