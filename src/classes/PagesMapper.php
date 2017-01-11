@@ -52,7 +52,24 @@ class PagesMapper extends Mapper
           FROM ".$this->settings['db']['prefix']."pages p
           where p.id = :page_id";
       $stmt = $this->db->prepare($sql);
-      $stmt->execute(["page_id" => $page_id]);
+      $stmt->execute(["page_id" => (int)$page_id]);
+      $results = $stmt->fetch(PDO::FETCH_OBJ);
+      $results->body = base64_encode($results->body);
+      return $results;
+  }
+
+  /**
+   * Get one pages by its ID
+   *
+   * @param int $ticket_id The ID of the ticket
+   * @return TicketEntity  The ticket
+   */
+  public function getPageByTag($page_tag) {
+      $sql = "SELECT p.id, p.tag, p.title, p.time, p.body, p.owner, p.user, p.latest, p.note
+          FROM ".$this->settings['db']['prefix']."pages p
+          where p.tag = :page_tag";
+      $stmt = $this->db->prepare($sql);
+      $stmt->execute(["page_tag" => $page_tag]);
       $results = $stmt->fetch(PDO::FETCH_OBJ);
       $results->body = base64_encode($results->body);
       return $results;

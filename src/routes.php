@@ -1,9 +1,35 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+
+use \Firebase\JWT\JWT;
+
+//use Slim\Middleware\JwtAuthentication;
+//use Slim\Middleware\HttpBasicAuthentication;
 // Routes
 
 // Pages
+
+$app->post("/token", function ($request, $response, $arguments) {
+
+    $now = new DateTime();
+    $future = new DateTime("now +2 hours");
+    $server = $request->getServerParams();
+
+    $payload = [
+        "iat" => $now->getTimeStamp(),
+        "exp" => $future->getTimeStamp(),
+        "sub" => $server["PHP_AUTH_USER"],
+    ];
+    $secret = "supersecretkeyyoushouldnotcommittogithub";
+    $token = JWT::encode($payload, $secret, "HS256");
+    $data["status"] = "ok";
+    $data["token"] = $token;
+
+    return $response->withStatus(201)
+        ->withHeader("Content-Type", "application/json")
+        ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+});
 
 $app->get('/pages/[{rows}]', function (Request $request, Response $response, $args) {
   $this->logger->addInfo("Page table description");
@@ -18,7 +44,14 @@ $app->get('/pages/[{rows}]', function (Request $request, Response $response, $ar
 $app->get('/pages/id/{id}', function (Request $request, Response $response, $args) {
   $this->logger->addInfo("Page table description");
   $mapper = new PagesMapper($this->db, $this->settings);
-  $mapper = $mapper->getPageById($args['id']);
+  $mapper = $mapper->getPageById((int)$args['id']);
+  return json_encode($mapper);
+});
+
+$app->get('/pages/tag/{tag}', function (Request $request, Response $response, $args) {
+  $this->logger->addInfo("Page table description");
+  $mapper = new PagesMapper($this->db, $this->settings);
+  $mapper = $mapper->getPageByTag($args['tag']);
   return json_encode($mapper);
 });
 

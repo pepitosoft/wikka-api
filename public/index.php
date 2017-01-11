@@ -20,6 +20,9 @@ spl_autoload_register(function ($classname) {
 
 session_start();
 
+//$pdo = new \PDO("sqlite:../../wikka");
+
+
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);

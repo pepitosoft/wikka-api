@@ -12,14 +12,14 @@ return [
         // Monolog settings
         'logger' => [
             'name' => 'slim-app',
-            'path' => __DIR__ . '/../logs/app.log',
+            'path' => __DIR__ . '/../../../../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
 
         // DB settings
         'db' => [
-          'type'    => 'mysql',
-          'path'    => __DIR__ . '/../../wikka',
+          'type'    => 'sqlite',
+          'path'    => __DIR__ . '/../../../../wikka',
           'prefix'  => 'wikka_',
           'host'    => "localhost",
           'user'    => "wikka",
@@ -28,21 +28,3 @@ return [
         ],
     ],
 ];
-
-/*
-'type'    => 'mysql',
-'path'    => __DIR__ . '/../../wikka',
-'host'    => "localhost",
-'user'    => "wikka",
-'pass'    => "wikka-password",
-'dbname'  => "wikka",
-*/
-
-/*
-'type'    => 'sqlite',
-'path'    => __DIR__ . '/../../wikka',
-'host'    => "localhost",
-'user'    => "user",
-'pass'    => "password",
-'dbname'  => "exampleapp",
-*/
