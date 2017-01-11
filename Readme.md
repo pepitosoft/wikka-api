@@ -112,7 +112,7 @@ Guzzle-wikka is a plugin build on guzzle, for access other APIs (include Wikka-A
 
 [![Guzzle](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/GuzzleAction.png)](http://docs.guzzlephp.org/en/latest/)
 
-GuzzleAction.png
+[![Guzzle](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/GuzzleActionRender.png)](http://docs.guzzlephp.org/en/latest/)
 
 ### How install it?
 
