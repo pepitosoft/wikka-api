@@ -1,6 +1,6 @@
 # Wikka REST API
 
-[![Slim](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/github.png)](https://www.slimframework.com/)
+[![Slim](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/slimlogo.jpg)](https://www.slimframework.com/)
 [![WikkaWiki](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/wizard.gif)](http://wikkawiki.org/HomePage)
 
 ## What is this?
