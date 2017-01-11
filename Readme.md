@@ -25,6 +25,8 @@ A RESTful API has many way to access, the classic way is using the curl command:
 
 1. Create a "token", from the WikkaUser:
 
+### curl
+
 For example, we want to create a token login with our Wikka user, the access to make query needs this token:
 
 ```bash
@@ -53,6 +55,7 @@ Content-Type: application/json
 }
 ```
 
+### HTTPie
 
 or I prefer HTTPie for this
 
@@ -92,6 +95,9 @@ Vary: Accept-Encoding
 
 ```bash
 http --auth-type=jwt --auth="$TOKEN:" http://172.17.0.2/wikka/3rdparty/plugins/slim/public/index.php/pages/tag/HomePage | jshon | grep body | awk -F "\"" '{print($4)}' | base64 -d
+```
+
+```wiki
 {{image url="images/wikka_logo.jpg" alt="wikka logo" title="Welcome to your Wikka site"}}---{{checkversion}}---Thanks for installing Wikka! This wiki runs on version ##{{wikkaversion}}##, patch level ##{{wikkapatchlevel}}##. You may want to read the [[WikkaReleaseNotes | release notes]] to learn what's new in this release.---------{{color c='red' text='NOTE: This version has registrations disabled by default.'}} You MUST enable user registrations in ##wikka.config.php## (##'allow_user_registration' => '1',##) to allow access by users other than the administrator set up during installation.------>>==Keep up-to-date==To receive the latest news from the Wikka Development Team, you can sign up to one of our [[http://wikkawiki.org/WikkaMailingLists | mailing lists]], subscribe to our [[http://blog.wikkawiki.org | Blog]] or join us for a chat on [[http://wikkawiki.org/TheLounge | IRC]].--->>====Getting started====Double-click on this page or click on the **Edit** link in the page footer to get started. If you are not sure how a wiki works, you can check out the [[FormattingRules | Wikka formatting guide]] and play in the SandBox.------>>==Need more help?==Don't forget to visit the [[http://wikkawiki.org | WikkaWiki website]]!>>====Some useful pages====
 ~-[[FormattingRules | Wikka formatting guide]]
 ~-[[WikkaDocumentation | Documentation]]
@@ -99,6 +105,15 @@ http --auth-type=jwt --auth="$TOKEN:" http://172.17.0.2/wikka/3rdparty/plugins/s
 ~-[[SysInfo | System Information]]
 ---You will find more useful pages in the [[CategoryWiki | Wiki category]] or in the PageIndex.---
 ```
+
+### Guzzle action
+
+Guzzle-wikka is a plugin build on guzzle, for access other APIs (include Wikka-Api)
+
+[![Guzzle](https://raw.githubusercontent.com/pepitosoft/wikka-api/master/images/GuzzleAction.png)](http://docs.guzzlephp.org/en/latest/)
+
+GuzzleAction.png
+
 ### How install it?
 
 #### Install the action:
@@ -132,9 +147,10 @@ git clone https://github.com/pepitosoft/wikka-api.git slim/
 - [x] TODO: Support Mysql/sqlite.
 
 # Powered by:
-- [Slim](https://www.slimframework.com/)
+- [Slim](https://www.slimframework.com/) Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs.
 - [WikkaWiki](http://wikkawiki.org/HomePage) is a flexible, standards-compliant and lightweight wiki engine written in PHP, which uses MySQL to store pages.
 - [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth) PSR-7 JWT Authentication Middleware.
+- [Guzzle](http://docs.guzzlephp.org/en/latest/)
 
 # References:
 - [PSR-7 JSON Web Token Authentication Middleware](https://www.appelsiini.net/projects/slim-jwt-auth)
